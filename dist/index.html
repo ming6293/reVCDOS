@@ -717,6 +717,20 @@
         // ignore
     }
     </script>
+    <script>
+    // دالة لإجبار اللعبة على إظهار تحكمات اللمس
+    function forceEnableTouchControls() {
+        document.body.setAttribute('data-is-touch', '1');
+    }
+
+    // 1. تفعيل التحكمات فوراً إذا كان الجهاز يدعم اللمس
+    if ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches) {
+        forceEnableTouchControls();
+    }
+
+    // 2. كإجراء احتياطي: تفعيل التحكمات بمجرد لمس الشاشة لأول مرة
+    window.addEventListener('touchstart', forceEnableTouchControls, { once: true });
+    </script>
 </body>
 
 </html>
